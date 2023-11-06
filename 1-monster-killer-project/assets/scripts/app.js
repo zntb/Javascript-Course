@@ -222,7 +222,10 @@ function printLogHandler() {
   // }
   let i = 1;
   for (const logEntry of battleLog) {
-    console.log(logEntry, i);
+    console.log(`#${i}`);
+    for (const key in logEntry) {
+      console.log(`${key} => ${logEntry[key]}`);
+    }
     i++;
   }
 }
