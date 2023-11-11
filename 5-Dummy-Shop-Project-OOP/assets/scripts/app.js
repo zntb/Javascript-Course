@@ -1,19 +1,32 @@
+class Product {
+  title = 'DEFAULT';
+  imageUrl;
+  description;
+  price;
+
+  constructor(title, image, desc, price) {
+    this.title = title;
+    this.imageUrl = image;
+    this.description = desc;
+    this.price = price;
+  }
+}
+
 const productList = {
   products: [
-    {
-      title: 'A Pillow',
-      imageUrl:
-        'https://tse1.mm.bing.net/th?id=OIP.g9907fpotFfK7Qs2D5Rv-AHaGL&pid=Api&P=0&w=300&h=300',
-      price: 19.99,
-      description: 'A soft pillow!',
-    },
-    {
-      title: 'A Carpet',
-      imageUrl:
-        'https://tse4.mm.bing.net/th?id=OIP.ZobBsKpwKY7dZVblJqUBjQHaFj&pid=Api&P=0&w=300&h=300',
-      price: 8.99,
-      description: 'A carpet which you might like',
-    },
+    new Product(
+      'A Pillow',
+      'https://tse1.mm.bing.net/th?id=OIP.g9907fpotFfK7Qs2D5Rv-AHaGL&pid=Api&P=0&w=300&h=300',
+      'A soft pillow!',
+      19.99
+    ),
+
+    new Product(
+      'A Carpet',
+      'https://tse4.mm.bing.net/th?id=OIP.ZobBsKpwKY7dZVblJqUBjQHaFj&pid=Api&P=0&w=300&h=300',
+      'A carpet which you might like',
+      89.99
+    ),
   ],
   render() {
     const renderHook = document.getElementById('app');
