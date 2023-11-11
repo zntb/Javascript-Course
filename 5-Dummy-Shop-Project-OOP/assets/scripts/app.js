@@ -1,8 +1,8 @@
 class Product {
-  title = 'DEFAULT';
-  imageUrl;
-  description;
-  price;
+  // title = 'DEFAULT';
+  // imageUrl;
+  // description;
+  // price;
 
   constructor(title, image, desc, price) {
     this.title = title;
@@ -12,8 +12,31 @@ class Product {
   }
 }
 
-const productList = {
-  products: [
+class ProductItem {
+  constructor(product) {
+    this.product = product;
+  }
+
+  render() {
+    const prodEl = document.createElement('li');
+    prodEl.className = 'product-item';
+    prodEl.innerHTML = `
+      <div>
+         <img src="${this.product.imageUrl}" alt="${this.product.title}">
+         <div class="product-item__content">
+              <h2>${this.product.title}</h2>
+              <h3>\$${this.product.price}</h3>
+              <p>${this.product.description}</p>
+              <button>Add to cart</button>
+         </div>
+      </div>
+    `;
+    return prodEl;
+  }
+}
+
+class ProductList {
+  products = [
     new Product(
       'A Pillow',
       'https://tse1.mm.bing.net/th?id=OIP.g9907fpotFfK7Qs2D5Rv-AHaGL&pid=Api&P=0&w=300&h=300',
@@ -27,29 +50,22 @@ const productList = {
       'A carpet which you might like',
       89.99
     ),
-  ],
+  ];
+
+  constructor() {}
+
   render() {
     const renderHook = document.getElementById('app');
     const prodList = document.createElement('ul');
     prodList.className = 'product-list';
     for (const prod of this.products) {
-      const prodEl = document.createElement('li');
-      prodEl.className = 'product-item';
-      prodEl.innerHTML = `
-        <div>
-           <img src="${prod.imageUrl}" alt="${prod.title}">
-           <div class="product-item__content">
-                <h2>${prod.title}</h2>
-                <h3>\$${prod.price}</h3>
-                <p>${prod.description}</p>
-                <button>Add to cart</button>
-           </div>
-        </div>
-      `;
+      const productItem = new ProductItem(prod);
+      const prodEl = productItem.render();
       prodList.append(prodEl);
     }
     renderHook.append(prodList);
-  },
-};
+  }
+}
 
+const productList = new ProductList();
 productList.render();
