@@ -121,15 +121,16 @@ class ProductItem extends Conponent {
 }
 
 class ProductList extends Conponent {
-  products = [];
+  #products = [];
 
   constructor(renderHookId) {
-    super(renderHookId);
-    this.fetchProducts();
+    super(renderHookId, false);
+    this.render();
+    this.#fetchProducts();
   }
 
-  fetchProducts() {
-    this.products = [
+  #fetchProducts() {
+    this.#products = [
       new Product(
         'A Pillow',
         'https://tse1.mm.bing.net/th?id=OIP.g9907fpotFfK7Qs2D5Rv-AHaGL&pid=Api&P=0&w=300&h=300',
@@ -148,7 +149,7 @@ class ProductList extends Conponent {
   }
 
   renderProducts() {
-    for (const prod of this.products) {
+    for (const prod of this.#products) {
       new ProductItem(prod, 'prod-list');
     }
   }
@@ -157,7 +158,7 @@ class ProductList extends Conponent {
     this.createRootElement('ul', 'product-list', [
       new ElementAttribute('id', 'prod-list'),
     ]);
-    if (this.products && this.products.length > 0) {
+    if (this.#products && this.#products.length > 0) {
       this.renderProducts();
     }
   }
