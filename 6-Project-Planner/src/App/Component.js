@@ -1,3 +1,5 @@
+export function doSomething() {}
+
 export default class {
   constructor(hostElementId, insertBefore = false) {
     if (hostElementId) {
@@ -11,7 +13,7 @@ export default class {
   detach() {
     if (this.element) {
       this.element.remove();
-      // this.element.parentElement.removeChild(this.element); - older browser
+      // this.element.parentElement.removeChild(this.element);
     }
   }
 

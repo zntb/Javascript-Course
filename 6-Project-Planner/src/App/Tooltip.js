@@ -1,17 +1,18 @@
-import Comp from './Component.js';
+import Cmp, { doSomething } from './Component';
 
-export class Tooltip extends Comp {
+console.log('Tooltip running');
+
+export class Tooltip extends Cmp {
   constructor(closeNotifierFunction, text, hostElementId) {
     super(hostElementId);
     this.closeNotifier = closeNotifierFunction;
     this.text = text;
+    this.closeTooltip = () => {
+      this.detach();
+      this.closeNotifier();
+    };
     this.create();
   }
-
-  closeTooltip = () => {
-    this.detach();
-    this.closeNotifier();
-  };
 
   create() {
     const tooltipElement = document.createElement('div');
@@ -30,7 +31,7 @@ export class Tooltip extends Comp {
     const y = hostElPosTop + hostElHeight - parentElementScrolling - 10;
 
     tooltipElement.style.position = 'absolute';
-    tooltipElement.style.left = x + 'px';
+    tooltipElement.style.left = x + 'px'; // 500px
     tooltipElement.style.top = y + 'px';
 
     tooltipElement.addEventListener('click', this.closeTooltip);
